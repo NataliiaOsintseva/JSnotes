@@ -8,3 +8,7 @@ function getDecimal(num) {
 
 alert( getDecimal(12.5) );
 alert( getDecimal(1.2) );
+
+function getDecimal2(x) {
+  return x.toFixed(0) - x;
+}
