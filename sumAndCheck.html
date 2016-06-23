@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+
+<body>
+
+  <script>
+    var firstNum = +prompt("Insert first number");
+    var secondNum = +prompt("Insert second number");
+
+    function sum(number1, number2) {
+      var res = number1 + number2;
+      return res;
+    }
+
+    alert(sum(firstNum, secondNum));
+
+    describe("sum", function() {
+
+      describe("Sums two numbers", function(x, y) {
+
+        function makeTest(x, y) {
+          var expected = x + y;
+          it(x + " + " + y + " equals " + expected, function() {
+            assert.equal(sum(x, y), expected);
+          });
+        }
+
+        for (var x = -3; x <= 5; x++) {
+          makeTest(x, -2.67);
+        }
+
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>
