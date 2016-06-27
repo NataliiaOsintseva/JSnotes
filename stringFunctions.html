@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+  <script src="test.js"></script>
+</head>
+
+<body>
+
+  <script>
+    function checkSpam(str) {
+      return isFound("viagra", str.toLowerCase()) ? true : isFound("xxx", str.toLowerCase());
+    }
+
+    function isFound(target, base) {
+      for (var x = 0; x < base.length; x++) {
+        var pos = base.indexOf(target, x);
+        if (pos != -1) {
+          return true;
+        }
+      }
+      return false;
+    }
+    
+     function extractCurrencyValue(str) {
+      var startPos;
+      for (var x = 0; x < str.length; x++) {
+        var isInt = +str[x];
+        if (!isNaN(isInt)) {
+          startPos = x;
+          break;
+        }
+      }
+      var int = +str.slice(startPos);
+      return int;
+    }
+    
+    function truncate(str, maxlength){
+      if (str.length <= maxlength){
+        return str;
+      }
+      return str.slice(0, maxlength-3) + "...";
+    }
+
+    describe("checkSpam", function() {
+      it('считает спамом "buy ViAgRA now"', function() {
+        assert.isTrue(checkSpam('buy ViAgRA now'));
+      });
+
+      it('считает спамом "free xxXXxx"', function() {
+        assert.isTrue(checkSpam('free xxXXxx'));
+      });
+
+      it('не считает спамом "innocent rabbit"', function() {
+        assert.isFalse(checkSpam('innocent rabbit'));
+      });
+    });
+    
+  describe("truncate", function() {
+      it("обрезает строку до указанной длины (включая троеточие)", function() {
+      assert.equal(
+       truncate("Вот, что мне хотелось бы сказать на эту тему:", 20),
+       "Вот, что мне хоте..."
+      );
+    });
+
+      it("не меняет короткие строки", function() {
+        assert.equal(
+         truncate("Всем привет!", 20),
+         "Всем привет!"
+       );
+     });
+
+  });
+  
+  describe("extractCurrencyValue", function() {
+
+    it("выделяет из строки $120 число 120", function() {
+      assert.strictEqual(extractCurrencyValue('$120'), 120);
+    });
+
+   it("выделяет из строки EUR150 число 150", function() {
+     assert.strictEqual(extractCurrencyValue('EUR150'), 150);
+   });
+
+  });
+  </script>
+
+</body>
+
+</html>
