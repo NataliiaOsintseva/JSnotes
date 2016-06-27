@@ -11,10 +11,12 @@
   <script>
     function ucFirst(str) {
       if (!str) {
-        return "";
+        return str;
       }
       var firstChar = str.charAt(0).toUpperCase();
       var rest = str.slice(1);
+      
+      // or return str[0].toUpperCase() + str.slice(1);
 
       return firstChar + rest;
     }
